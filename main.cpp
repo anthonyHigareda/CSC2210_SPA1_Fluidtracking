@@ -9,6 +9,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main() {
@@ -16,7 +17,16 @@ int main() {
   int fluidIntake = 0;
   int fluidOutput = 0;
 
-  string outputFluids[] = ["urine", "bloodloss", "diarrhea"];
+  string outputFluids[] = {"urine", "bloodloss", "diarrhea"};
+
+  ifstream file("data.txt");
+  string line;
+
+  while (getline(file, line)) {
+    cout << line << endl;
+  }
+
+
 
 
 }
