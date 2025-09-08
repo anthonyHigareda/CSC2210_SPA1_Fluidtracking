@@ -20,7 +20,9 @@ int main() {
   string outputFluids[] = {"urine", "bloodloss", "diarrhea"};
   // The 3 types of fluid that can be outputs
 
-  ifstream file("data.txt");  // Open the input data text file
+  ifstream file("data.txt");  // Open the input data text file.
+  // NOTE: the data file must be inside "\cmake-build-debug" for whatever
+  // frickin reason, I don't know how that will interact with eSubmit.
 
   if (!file.is_open()) {  // Verifies the file was opened successfully
     cout << "File could not be opened" << endl;
