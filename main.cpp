@@ -14,19 +14,21 @@ using namespace std;
 
 int main() {
 
-  int fluidIntake = 0;
-  int fluidOutput = 0;
+  string time, fluidType;   // Time of fluid intake/output and the type of fluid
+  int fluidIntake, fluidOutput; // Total amounts of fluid intake and output
 
   string outputFluids[] = {"urine", "bloodloss", "diarrhea"};
+  // The 3 types of fluid that can be outputs
 
-  ifstream file("data.txt");
-  string line;
+  ifstream file("data.txt");  // Open the input data text file
 
-  while (getline(file, line)) {
-    cout << line << endl;
+  if (!file.is_open()) {  // Verifies the file was opened successfully
+    cout << "File could not be opened" << endl;
   }
 
+  file >> time >> fluidType >> fluidIntake; // Pulls from the file stream and assigns the values
+  cout << "the final fluid differential is " << fluidIntake << " ml" << endl; // Report to the user
 
-
+  return 0;
 
 }
