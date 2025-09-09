@@ -9,11 +9,9 @@
 //
 
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
 using namespace std;
-
 
 int main() {
 
@@ -28,15 +26,7 @@ int main() {
   //  The 3 types of fluid that can be outputs
   vector<string> outputFluids{"urine", "bloodloss", "diarrhea"};
 
-  ifstream file("data.txt");  // Open the input data text file.
-  // NOTE: the data file must be inside "\cmake-build-debug" for whatever
-  // frickin reason, I don't know how that will interact with eSubmit.
-
-  if (!file.is_open()) {  // Verifies the file was opened successfully
-    cout << "File could not be opened" << endl;
-  }
-
-  while (file >> time >> fluidType >> fluidVolume) {  // Pulls from the file stream and assigns values
+  while (cin/*cin*/ >> time >> fluidType >> fluidVolume) {  // Pulls from the file stream and assigns values
     // to time, fluidType, and fluidVolume, then keeps iterating until the file stream is empty.
 
     //  https://www.geeksforgeeks.org/cpp/check-if-vector-contains-given-element-in-cpp/
@@ -44,7 +34,10 @@ int main() {
     //  in the outputFluids vector.
     //  If count() evaluates to be nonzero, then the fluid
     //  we have pulled from the file is an output fluid.
-    if (count(begin(outputFluids), end(outputFluids), fluidType) > 0) {
+    const bool wasOutput = count(begin(outputFluids), end(outputFluids), fluidType) > 0;
+
+
+    if (wasOutput) {
       totalOutput += fluidVolume;
     } else {
       totalIntake += fluidVolume;
@@ -52,12 +45,9 @@ int main() {
 
     //  Reports to the console whenever the fluid intake/output
     //  differential exceeds 1000 ml in either direction
-    if (totalIntake >= totalOutput + 1000) {
-      cout << "after consuming " << fluidType << " at " << time <<
-        ", intake exceeds output by " << totalIntake - totalOutput << " ml" << endl;
-    } else if (totalOutput >= totalIntake + 1000) {
-      cout << "after consuming " << fluidType << " at " << time <<
-        ", output exceeds intake by " << totalOutput - totalIntake << " ml" << endl;
+    if (!wasOutput && totalIntake >= totalOutput + 1000) {
+        cout << "after consuming " << fluidType << " at " << time <<
+          ", intake exceeds output by " << totalIntake - totalOutput << " ml" << endl;
     }
 
   }
