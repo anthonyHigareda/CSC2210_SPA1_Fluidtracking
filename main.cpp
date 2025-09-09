@@ -50,12 +50,20 @@ int main() {
       totalIntake += fluidVolume;
     }
 
+    //  Reports to the console whenever the fluid intake/output
+    //  differential exceeds 1000 ml in either direction
     if (totalIntake >= totalOutput + 1000) {
       cout << "after consuming " << fluidType << " at " << time <<
         ", intake exceeds output by " << totalIntake - totalOutput << " ml" << endl;
+    } else if (totalOutput >= totalIntake + 1000) {
+      cout << "after consuming " << fluidType << " at " << time <<
+        ", output exceeds intake by " << totalOutput - totalIntake << " ml" << endl;
     }
 
   }
+
+  //  Report the final result to the user
+  cout << "the final fluid differential is " << totalIntake - totalOutput << " ml" << endl;
 
   return 0;
 
