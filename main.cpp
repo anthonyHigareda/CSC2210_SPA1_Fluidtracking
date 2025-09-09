@@ -1,11 +1,12 @@
 //
-// CSC2210-003
-// Dr. Hasker
-// Fall 2025
+//  CSC2210-003
+//  Dr. Hasker
+//  Fall 2025
 //
-// Author: Anthony Higareda
-// SPA 1: Fluid Tracking
-// Created: 05 September 2025
+//  Author: Anthony Higareda
+//  SPA 1: Fluid Tracking
+//  Created: 05 September 2025
+//  Edited: 09 September 2025
 //
 
 #include <iostream>
@@ -26,29 +27,29 @@ int main() {
   //  The 3 types of fluid that can be outputs
   vector<string> outputFluids{"urine", "bloodloss", "diarrhea"};
 
-  while (cin/*cin*/ >> time >> fluidType >> fluidVolume) {  // Pulls from the file stream and assigns values
-    // to time, fluidType, and fluidVolume, then keeps iterating until the file stream is empty.
+  while (cin >> time >> fluidType >> fluidVolume) {  //  Pulls from console input and assigns values
+    // to time, fluidType, and fluidVolume, then keeps iterating until the console is empty.
 
     //  https://www.geeksforgeeks.org/cpp/check-if-vector-contains-given-element-in-cpp/
     //  Referenced this GFG article for help finding a matching output fluid name
     //  in the outputFluids vector.
     //  If count() evaluates to be nonzero, then the fluid
-    //  we have pulled from the file is an output fluid.
+    //  we have pulled from the console is an output fluid.
     const bool wasOutput = count(begin(outputFluids), end(outputFluids), fluidType) > 0;
 
-
-    if (wasOutput) {
+    //  Adds the fluid volume to totalOutput or totalInput
+    //  depending on which kind of fluid was detected
+    if (wasOutput)
       totalOutput += fluidVolume;
-    } else {
+    else
       totalIntake += fluidVolume;
-    }
 
-    //  Reports to the console whenever the fluid intake/output
-    //  differential exceeds 1000 ml in either direction
-    if (!wasOutput && totalIntake >= totalOutput + 1000) {
+
+    //  Reports to the console whenever the fluid intake differential exceeds 1000 ml
+    //  and only when the fluid being processed was an intake fluid
+    if (!wasOutput && totalIntake >= totalOutput + 1000)
         cout << "after consuming " << fluidType << " at " << time <<
-          ", intake exceeds output by " << totalIntake - totalOutput << " ml" << endl;
-    }
+            ", intake exceeds output by " << totalIntake - totalOutput << " ml" << endl;
 
   }
 
